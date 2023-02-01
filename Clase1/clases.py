@@ -2,7 +2,7 @@ import numpy
 import time
 import matplotlib.pyplot as plt
 class particle:
-    def __init__(self,r0:list,v0:list,a0:list,t,m=1,radius=0.3,Id=0):
+    def __init__(self,r0:list,v0:list,a0:list,t,m=1,radius=0.3,Id=1):
         self.r=r0
         self.v=v0
         self.a=a0
