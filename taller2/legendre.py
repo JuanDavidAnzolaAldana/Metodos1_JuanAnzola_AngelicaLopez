@@ -1,6 +1,5 @@
 import sympy
 import numpy
-import matplotlib.pyplot as plt
 x=sympy.Symbol("x",real=True)
 def func(eq,pos):
     val=sympy.lambdify([x],eq)(pos)
