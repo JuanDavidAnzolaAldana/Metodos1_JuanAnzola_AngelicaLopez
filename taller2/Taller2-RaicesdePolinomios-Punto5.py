@@ -36,7 +36,7 @@ xn = np.linspace(0,20,100)
 
 for i, p in enumerate(Laguerre):
     pn = sym.lambdify([x],p,'numpy')
-    plt.plot(_x,pn(_x),label=f'L_{i}(x)')
+    plt.plot(xn,pn(xn),label=f'L_{i}(x)')
 
 
 # In[66]:
@@ -53,7 +53,7 @@ for i in range(20):
 
 for i, p in enumerate(Laguerre):
     pn = sym.lambdify([x],p,'numpy')
-    plt.plot(_x,pn(_x),label=f'L_{i}(x)')
+    plt.plot(xn,pn(xn),label=f'L_{i}(x)')
         
 
 
