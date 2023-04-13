@@ -33,5 +33,8 @@ def Propios(mat):
 val,vec=Propios(matriz)
 print("El valor de estado base es:")
 print(val[len(val)-1])
+matriz-=numpy.array([[1,0,0],
+                    [0,1,0],
+                    [0,0,1]])*val[len(val)-1]
 print("Su vector propio asociado es:")
 print(vec[len(val)-1])
