@@ -31,10 +31,34 @@ def Propios(mat):
         triz=triz-l*ProductoTensorial(v,v)
     return valores,vetores
 val,vec=Propios(matriz)
+val=val[len(val)-1]
+matriz=matriz-(numpy.eye(3)*val)
+def norma(vector):
+    return numpy.sum(vector**2)**(1/2)
+def func(vector):
+    return norma(matriz@vector)
+def derivada(f,r,h):
+    return (f(r+h)-f(r-h))/(2*(norma(h)))
+def gradiente(f,r,h):
+    grad = numpy.array([0.0, 0.0, 0.0])
+    for i in range(len(grad)):
+        delta=numpy.zeros(grad.shape)
+        delta[i]=h
+        grad[i]=derivada(f,r,delta)
+    return grad
+def descenso(f,r):
+    grad=numpy.zeros((3))
+    dist=0.5
+    while dist>1e-16:
+        last=grad
+        grad=gradiente(f,r,0.00001)
+        grad=grad/norma(grad)
+        if numpy.sum(last*grad)<0:
+            dist/=2
+        r-=dist*grad
+    return r/norma(r)
+vec=descenso(func,numpy.array([1.0,0.0,0.0]))
 print("El valor de estado base es:")
-print(val[len(val)-1])
-matriz-=numpy.array([[1,0,0],
-                    [0,1,0],
-                    [0,0,1]])*val[len(val)-1]
+print(val)
 print("Su vector propio asociado es:")
-print(vec[len(val)-1])
+print(vec)
