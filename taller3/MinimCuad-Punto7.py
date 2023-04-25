@@ -45,9 +45,9 @@ def grad_X(x,y,theta,N=10000):
     da, db, dc = 0.,0.,0.
     for n in range(N):
 
-        da += -2*((y[n] - M(x[n],theta))*(1/(theta[1] + np.exp(theta[2]*x[n]))))
-        db += -2*((y[n] - M(x[n],theta))*(-1*theta[0]/((theta[1] + np.exp(theta[2]*x[n])))))
-        dc += -2*((y[n] - M(x[n],theta))*(-1*theta[0]*np.exp(theta[2]*x[n])*x[n]/((theta[1] + np.exp(theta[2]*x[n])))))
+        da += -2*((y[n] - M(x[n],theta))*(1/(theta[1] + np.exp(-theta[2]*x[n]))))
+        db += -2*((y[n] - M(x[n],theta))*(-1*theta[0]/((theta[1] + np.exp(-theta[2]*x[n]))**2)))
+        dc += -2*((y[n] - M(x[n],theta))*(theta[0]*np.exp(-theta[2]*x[n])*x[n]/((theta[1] + np.exp(-theta[2]*x[n]))**2)))
 
     grad[0]= da
     grad[1]= db
@@ -74,7 +74,8 @@ print(param)
 # In[75]:
 
 
-plt.plot(values[:,-1])
+plt.plot(values)
+plt.show()
 
 
 # In[76]:
