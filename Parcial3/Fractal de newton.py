@@ -27,7 +27,7 @@ jac=sympy.lambdify([x,y],jacobiano)
 def newtonRaphson(punto,f,j):
     delta=numpy.array((1,1))
     i=0
-    while numpy.sum(delta**2)**(1/2)>0.0000001 and i<1000:
+    while numpy.sum(delta**2)>0.000000001 and i<1000:
         i+=1
         jac=j(punto[0],punto[1])
         inv=numpy.linalg.inv(jac)
@@ -50,16 +50,16 @@ for i in tqdm.tqdm(range(len(X))):
             resultado=newtonRaphson(numpy.array([X[i,j],Y[i,j]]), function, jac)
         except Exception as e:
             resultado=numpy.array([0,0])
-            priint(e)
+            print(e)
             
         d0=numpy.array([-1/2,(3**(1/2))/2])-resultado
         d1=numpy.array([-1/2,-(3**(1/2))/2])-resultado
         d2=numpy.array([1,0])-resultado
-        if (numpy.sum(d0**2)**(1/2)<0.1):
+        if (numpy.sum(d0**2)<0.1):
             Z[i,j]=20
-        if (numpy.sum(d1**2)**(1/2)<0.1):
+        if (numpy.sum(d1**2)<0.1):
             Z[i,j]=100
-        if (numpy.sum(d2**2)**(1/2)<0.1):
+        if (numpy.sum(d2**2)<0.1):
             Z[i,j]=222
 #Punto k
 plt.imshow(Z,cmap="coolwarm",extent=[-1,1,-1,1])
