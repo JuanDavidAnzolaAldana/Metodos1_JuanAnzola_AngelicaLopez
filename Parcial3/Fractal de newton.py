@@ -39,28 +39,27 @@ def newtonRaphson(punto,f,j):
 #Punto h
 print(newtonRaphson(numpy.array([0.5,0.5]), function, jac))
 #Punto i
-x0=numpy.linspace(-1,1,300)
-y0=numpy.linspace(-1,1,300)
-X,Y=numpy.meshgrid(x0,y0)
+n=80
+x0=numpy.linspace(-1,1,n)
+y0=numpy.linspace(-1,1,n)
 #Punto j
-Z=numpy.zeros([300,300],numpy.int64)
-for i in tqdm.tqdm(range(len(X))):
-    for j in range(len(X[0])):
+Z=numpy.zeros([n,n],numpy.int64)
+for i in tqdm.tqdm(range(n)):
+    for j in range(n):
         try:
-            resultado=newtonRaphson(numpy.array([X[i,j],Y[i,j]]), function, jac)
+            resultado=newtonRaphson(numpy.array([x0[i],y0[j]]), function, jac)
+            d0=numpy.array([-1/2,(3**(1/2))/2])-resultado
+            d1=numpy.array([-1/2,-(3**(1/2))/2])-resultado
+            d2=numpy.array([1,0])-resultado
+            if (numpy.sum(d0**2)<0.1):
+                Z[i,j]=20
+            elif (numpy.sum(d1**2)<0.1):
+                Z[i,j]=100
+            elif (numpy.sum(d2**2)<0.1):
+                Z[i,j]=222
         except Exception as e:
             resultado=numpy.array([0,0])
             print(e)
-            
-        d0=numpy.array([-1/2,(3**(1/2))/2])-resultado
-        d1=numpy.array([-1/2,-(3**(1/2))/2])-resultado
-        d2=numpy.array([1,0])-resultado
-        if (numpy.sum(d0**2)<0.1):
-            Z[i,j]=20
-        if (numpy.sum(d1**2)<0.1):
-            Z[i,j]=100
-        if (numpy.sum(d2**2)<0.1):
-            Z[i,j]=222
 #Punto k
 plt.imshow(Z,cmap="coolwarm",extent=[-1,1,-1,1])
 plt.show()
