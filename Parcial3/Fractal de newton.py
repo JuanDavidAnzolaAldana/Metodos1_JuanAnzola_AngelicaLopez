@@ -39,7 +39,7 @@ def newtonRaphson(punto,f,j):
 #Punto h
 print(newtonRaphson(numpy.array([0.5,0.5]), function, jac))
 #Punto i
-n=80
+n=300
 x0=numpy.linspace(-1,1,n)
 y0=numpy.linspace(-1,1,n)
 #Punto j
