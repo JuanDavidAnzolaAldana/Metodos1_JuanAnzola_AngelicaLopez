@@ -52,7 +52,7 @@ def Metropolis(X,Posterior):
     axes[-1].set_xlabel("step number",fontsize=15)
     plt.show()
     flat_samples = sampler.get_chain(discard=1000, thin=15, flat=True)
-    truths = numpy.percentile(pos, 68, axis=0)
+    truths = numpy.percentile(pos, 50, axis=0)
     figure = corner.corner(flat_samples, 
                        truths=truths, 
                        labels=labels, 
